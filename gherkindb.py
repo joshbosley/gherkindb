@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 # Copyright (c) 2015, Harrison Erd
+# Copyright (c) 2018, Josh Bosley
+#
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification,
@@ -26,14 +28,14 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 # THE POSSIBILITY OF SUCH DAMAGE.
 
-import os
-import simplejson
+import dill
+from os.path import exists, expanduser
 
 def load(location, option):
-    '''Return a pickledb object. location is the path to the json file.'''
-    return pickledb(location, option)
+    '''Return a gherkindb object. location is the path to the json file.'''
+    return gherkindb(location, option)
 
-class pickledb(object):
+class gherkindb(object):
 
     def __init__(self, location, option):
         '''Creates a database object and loads the data from the location path.
@@ -42,19 +44,33 @@ class pickledb(object):
 
     def load(self, location, option):
         '''Loads, reloads or changes the path to the db file.'''
-        location = os.path.expanduser(location)
+        location = expanduser(location)
         self.loco = location
         self.fsave = option
-        if os.path.exists(location):
+        self.db = {}
+        if exists(location):
             self._loaddb()
-        else:
-            self.db = {}
         return True
 
     def dump(self):
         '''Force dump memory db to file.'''
         self._dumpdb(True)
         return True
+
+    def sset(self, key, func_data):
+        '''Add serialized data'''
+        if type(func_data) != bytes:
+            func_data = dill.dumps(func_data)
+        self.db[key] = func_data
+        self._dumpdb(self.fsave)
+        return True
+
+    def sget(self, key):
+        '''Get previously serialized data'''
+        try:
+            return dill.loads(self.db[key])
+        except KeyError:
+            return None
 
     def set(self, key, value):
         '''Set the (string,int,whatever) value of a key'''
@@ -193,9 +209,13 @@ class pickledb(object):
 
     def _loaddb(self):
         '''Load or reload the json info from the file'''
-        self.db = simplejson.load(open(self.loco, 'rb'))
+        with open(self.loco, 'rb') as df:
+            self.db = dill.load(df)
+
+        print(self.db)
 
     def _dumpdb(self, forced):
         '''Write/save the json dump into the file'''
         if forced:
-           simplejson.dump(self.db, open(self.loco, 'wt'))
+            with open(self.loco, 'wb') as df:
+                dill.dump(self.db, df)

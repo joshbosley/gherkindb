@@ -2,9 +2,8 @@
 gherkindb
 --------
 
-gherkindb is lightweight, fast, and simple database based pickledb
+gherkindb is lightweight, fast, and simple database based on pickledb
 
-gherkindb is Fun
 ```````````````
 
 ::

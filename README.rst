@@ -1,15 +1,14 @@
-pickleDB
+gherkinDB
 --------
 
-pickleDB is lightweight, fast, and simple database based on the `simplejson <https://pypi.python.org/pypi/simplejson/>`_ module. And it's BSD licensed!
+gherkinDB is lightweight, fast, and simple database based `pickleDB <https://pythonhosted.org/pickleDB/>`_. 
 
 
-pickleDB is Fun
 ```````````````
 
-    >>> import pickledb
+    >>> import gherkinDB
 
-    >>> db = pickledb.load('test.db', False)
+    >>> db = gherkinDB.load('test.db', False)
 
     >>> db.set('key', 'value')
 
@@ -18,18 +17,3 @@ pickleDB is Fun
 
     >>> db.dump()
     True
-
-
-Easy to Install
-```````````````
-
-    $ pip install pickledb
-
-
-Links
-`````
-
-* `website <http://packages.python.org/pickleDB/>`_
-* `documentation <http://packages.python.org/pickleDB/commands.html>`_
-* `pypi
-  <http://pypi.python.org/pypi/pickleDB>`_

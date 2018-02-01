@@ -1,4 +1,4 @@
-#gherkinDB
+# gherkinDB
 
 gherkinDB is lightweight, fast, and simple database based `pickleDB <https://pythonhosted.org/pickleDB/>`_. 
 

@@ -1,6 +1,6 @@
 # gherkinDB
 
-gherkinDB is lightweight, fast, and simple database based `pickleDB <https://pythonhosted.org/pickleDB/>`_. 
+gherkinDB is lightweight, fast, and simple database based [pickleDB](https://pythonhosted.org/pickleDB/)
 
 While pickleDB went the way of using simplejson for speed, and is an awesome baby database for storing 
 data, it lacked the ability to store complex data. Thus, gherkinDB was born. Similar to pickleDB, but closer

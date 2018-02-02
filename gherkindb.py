@@ -212,8 +212,6 @@ class gherkindb(object):
         with open(self.loco, 'rb') as df:
             self.db = dill.load(df)
 
-        print(self.db)
-
     def _dumpdb(self, forced):
         '''Write/save the json dump into the file'''
         if forced:

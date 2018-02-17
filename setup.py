@@ -39,7 +39,7 @@ And Easy to Install
 
 ::
 
-    $ pip install gherkindb
+    $ pip3 install gherkindb
 
 
 """
@@ -47,7 +47,7 @@ And Easy to Install
 from distutils.core import setup
 
 setup(name = "gherkindb",
-    version="0.1.0",
+    version="0.1.2",
     description="A lightweight and simple database using dill.",
     author="Josh Bosley",
     author_email="bosley117@gmail.com",

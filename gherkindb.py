@@ -89,6 +89,10 @@ class gherkindb(object):
         '''Return a list of all keys in db'''
         return self.db.keys()
 
+    def scpyall(self):
+        '''Safe copy all keys in db'''
+        return self.db.copy().keys()
+
     def rem(self, key):
         '''Delete a key'''
         del self.db[key]
